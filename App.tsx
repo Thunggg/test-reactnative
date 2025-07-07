@@ -5,54 +5,48 @@ import InputTodo from './components/todo/input.todo';
 import ListTodo from './components/todo/list.todo';
 
 export default function App() {
-  const [age, setAge] = useState<number>(30);
-  const test = false;
-  const [person, setPerson] = useState<{
-    name: string,
-    age: number
-  }>({
-    name: "hoidanit",
-    age: 25
-  })
+  function randomInteger(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
-  const [todoList, setTodoList] = useState<ITodo[]>([
-    { id: 1, title: "Learn React Native" },
-    { id: 2, title: "Build a Todo App" },
-    { id: 3, title: "Read about Redux" },
-    { id: 4, title: "Practice JavaScript" },
-    { id: 5, title: "Explore Expo CLI" },
-    { id: 6, title: "Connect app to API" },
-    { id: 7, title: "Style with Tailwind CSS" },
-    { id: 8, title: "Deploy app to store" },
-    { id: 9, title: "Learn about animations" },
-    { id: 10, title: "Add offline support" }
-  ]);
+  const [todoList, setTodoList] = useState<ITodo[]>([]);
 
+  const addTodo = (text: string) => {
+    const todo = {
+      id: randomInteger(1, 1000000000),
+      title: text
+    };
+    setTodoList([...todoList, todo]);
+  }
+
+  const deleteTodo = (id: number) => {
+    const newTodo = todoList.filter(todo => todo.id != id);
+    setTodoList(newTodo);
+  }
 
   return (
     <View style={styles.container}>
 
-      <InputTodo />
+      <InputTodo
+        addTodo={addTodo}
+      />
 
       <ListTodo
         todoList={todoList}
+        deleteTodo={deleteTodo}
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-
-  text: {
-    fontSize: 30,
-    color: "blue"
-  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
     paddingTop: 50,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    fontSize: 60,
+    color: "red",
+    marginTop: 50
   },
 });
