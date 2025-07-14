@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
         borderColor: "violet",
         borderWidth: 1,
         padding: 10,
-        marginBottom: 10,
-        borderRadius: 5
+        borderRadius: 5,
+        marginBottom: 20
     }
 })
 
@@ -21,47 +21,42 @@ const InputTodo = (props: IProps) => {
     const [name, setName] = useState<string>("");
 
     const handleAddNewTodo = () => {
+        //validate
         if (!name) {
-            Alert.alert('Alert Title', 'My Alert Msg', [
-                {
-                    text: 'Cancel',
-                    onPress: () => console.log('Cancel Pressed'),
-                    style: 'cancel',
-                },
-                { text: 'OK', onPress: () => console.log('OK Pressed') },
-            ]);
+            Alert.alert(
+                "Thông tin không hợp lệ",
+                "Tiêu đề không được để trống",
+                [
+                    // {
+                    //     text: 'Cancel',
+                    //     onPress: () => console.log('Cancel Pressed'),
+                    //     style: 'cancel',
+                    // },
+                    { text: 'OK Con dê', onPress: () => console.log('OK Pressed') },
+                ]
+            )
             return;
         }
         addTodo(name);
         setName("");
     }
+
     return (
         <>
-            <View style={{ marginBottom: 5 }}>
+            <View style={{ marginBottom: 20 }} >
                 <TextInput
-                    onChangeText={v => setName(v)}
-                    autoCapitalize='words'
-                    keyboardType='ascii-capable'
+                    onChangeText={value => setName(value)}
+                    value={name}
+                    autoCapitalize='none'
                     autoCorrect={false}
-                    multiline
                     style={styles.todoInput}
                 />
 
-                <View style={{
-                    backgroundColor: "blue",
-                    marginBottom: 10
-                }}>
-                    <Button
-                        title='Add new'
-                        onPress={() => handleAddNewTodo()}
-                        color={"white"}
-                    />
-                </View>
+                <MineButton
+                    title="add new"
+                    onPress={handleAddNewTodo}
+                />
             </View>
-            <MineButton
-                title="Add new"
-                onPress={() => handleAddNewTodo()}
-            />
 
         </>
     )

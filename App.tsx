@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Button, FlatList, Keyboard, ScrollView, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 import InputTodo from './components/todo/input.todo';
 import ListTodo from './components/todo/list.todo';
+import FlexBox from './components/todo/flexBox';
 
 export default function App() {
   function randomInteger(min: number, max: number) {
@@ -25,19 +26,20 @@ export default function App() {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
+    // <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    //   <View style={styles.container}>
 
-        <InputTodo
-          addTodo={addTodo}
-        />
+    //     <InputTodo
+    //       addTodo={addTodo}
+    //     />
 
-        <ListTodo
-          todoList={todoList}
-          deleteTodo={deleteTodo}
-        />
-      </View>
-    </TouchableWithoutFeedback>
+    //     <ListTodo
+    //       todoList={todoList}
+    //       deleteTodo={deleteTodo}
+    //     />
+    //   </View>
+    // </TouchableWithoutFeedback>
+    <FlexBox></FlexBox>
   );
 }
 
